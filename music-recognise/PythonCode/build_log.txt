@@ -1,0 +1,36 @@
+============================================================
+Fingerprint Database Builder
+============================================================
+Dataset directory: /home/atharva-parkhi/raagam/dataset
+Output directory: /home/atharva-parkhi/raagam/music-recognise/PythonCode
+============================================================
+
+✓ Found 3 audio file(s)
+
+Creating new fingerprint database
+Creating new song mapping
+
+[1/3] Processing: 3.mp3
+  Converting 3.mp3 to WAV... ✓
+  Fingerprinting (Song ID: 1)... ✓
+  Fingerprint generated (1604 peaks)
+✗ Error: Unknown format code 'b' for object of type 'str'
+
+[2/3] Processing: 1.mp3
+  Converting 1.mp3 to WAV... ✓
+  Fingerprinting (Song ID: 1)... ✓
+  Fingerprint generated (3308 peaks)
+✗ Error: Unknown format code 'b' for object of type 'str'
+
+[3/3] Processing: 2.mp3
+  Converting 2.mp3 to WAV... ✓
+  Fingerprinting (Song ID: 1)... ✓
+  Fingerprint generated (4088 peaks)
+✗ Error: Unknown format code 'b' for object of type 'str'
+
+------------------------------------------------------------
+Saving databases...
+✓ Saved fingerprint database (0 entries)
+✓ Saved song map (0 songs)
+------------------------------------------------------------
+✓ Database build complete in 21.0 seconds

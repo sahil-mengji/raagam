@@ -203,10 +203,10 @@ class MainApplication(tk.Frame): # Class for the main GUI of the application. In
         print('Total search time: ' + str(round(self.finish, 3)) + ' seconds')
 
         # Recursively call the function to continue searching for a match until it finds one, provided that we are still recording
-        if self.songMetaData == 0 and self.recordAudioThread.isAlive():
+        if self.songMetaData == 0 and self.recordAudioThread.is_alive():
             self.IDSong(os.path.join(os.getcwd(), "RecordedAudio.wav"), fingerprintDictionary)
         # If the recording has stopped and a song has still not been found then admit that there was no match
-        elif self.songMetaData == 0 and not(self.recordAudioThread.isAlive()):
+        elif self.songMetaData == 0 and not(self.recordAudioThread.is_alive()):
             AudioModule.stopCondition = True
             tk.Frame.config(self, bg='navy')
             tk.Frame.update(self)

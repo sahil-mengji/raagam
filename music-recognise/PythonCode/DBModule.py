@@ -64,7 +64,10 @@ def SaveHashTable(dictionary, textFile): # Save a hash table out to a file
         pickle.dump(dictionary, savefile)
 
 def LoadHashTable(textFile): # Load a hash table from a given file
-    with open(os.path.join(os.getcwd(), str(textFile) + ".txt"), "rb") as savefile:
+    path = os.path.join(os.getcwd(), str(textFile) + ".txt")
+    if not os.path.exists(path):
+        return {}
+    with open(path, "rb") as savefile:
         pulledDictionary = pickle.load(savefile)
         return pulledDictionary
 
