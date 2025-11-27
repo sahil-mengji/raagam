@@ -7,15 +7,19 @@ Created: Jan 2018
 '''
 import sys
 import pickle
+import subprocess
 import numpy as np
 import music21
 from config import config
 
-def simulate_fsm(raagam,taalam,num_avartanams=50):
+def simulate_fsm(raagam,taalam,num_avartanams=50, seed=None):
     '''
     This function simulates a raaga-specific FSM to produce a score.
     ARGS:
     raagam: string - raagam name
+    taalam: string - taalam name
+    num_avartanams: int - number of repetitions (default: 50)
+    seed: int or None - random seed for reproducibility (if None, uses current time)
 
     RETURNS:
     simulated_fsm: music21.stream.Score object - a score that has 1 part and 1 Measure
@@ -23,6 +27,12 @@ def simulate_fsm(raagam,taalam,num_avartanams=50):
 
     See config.py for simulation parameters.
     '''
+    # Set random seed for variety in generation
+    if seed is None:
+        import time
+        seed = int(time.time() * 1000) % (2**31)
+    np.random.seed(seed)
+    
     try:
         unotes = list(np.load(config['RAAGAM_BASEPATH']+raagam.lower()+'/metadata.npy'))
     except:
@@ -97,8 +107,21 @@ def simulate_fsm(raagam,taalam,num_avartanams=50):
 
     # add the part to it
     simulated_fsm.append(part)
-    simulated_fsm.show('midi')
-    simulated_fsm.show()
+    # Save MIDI file
+    midi_file = 'simulated_'+raagam+'.midi'
+    simulated_fsm.write('midi', fp=midi_file)
+    print(f"Generated MIDI file: {midi_file}")
+    
+    # Convert MIDI to WAV using timidity
+    wav_file = 'simulated_'+raagam+'.wav'
+    try:
+        subprocess.run(['timidity', midi_file, '-Ow', '-o', wav_file], 
+                      check=True, capture_output=True)
+        print(f"Generated audio file: {wav_file}")
+    except FileNotFoundError:
+        print("timidity not found. Install it with: sudo apt-get install timidity")
+    except subprocess.CalledProcessError as e:
+        print(f"Error converting MIDI to audio: {e}")
 
     return simulated_fsm
 
