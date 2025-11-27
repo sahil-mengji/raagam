@@ -1,6 +1,6 @@
 import tkinter as tk
 import GUIModule
-import AudioModule 
+import AudioModule
 import DBModule
 import numpy
 from timeit import default_timer as timer
