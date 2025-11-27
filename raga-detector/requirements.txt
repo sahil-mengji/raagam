@@ -1,0 +1,17 @@
+bokeh
+ffmpeg-python
+Flask
+future
+ipython
+librosa
+matplotlib
+requests
+beautifulsoup4
+pandas
+numpy
+requests_futures
+selenium
+scikit-learn
+gunicorn
+werkzeug
+json2html

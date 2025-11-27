@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Ragam identification for Carnatic Music">
+  <!-- <link rel="icon" href="favicon.ico"> -->
+
+  <title>IsAI</title>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h2>IsAI</h2>
+        <h5>Upload an audio file to learn what ragam that clip is of. </h5>
+        <form enctype="multipart/form-data" action="" method="POST">
+          <div class="col-lg-10 text-center form-group">
+            <label for="fileUpload">Upload audio file (less than 5MB)</label>
+            <input type="file" name="audiofile" class="form-control" id="fileUpload" aria-describedby="fileUpload">
+          </div>
+          <div class="col-lg-2 text-center">
+            <input type="submit" value="Upload" class="btn btn-primary">
+          </div>
+        </form>
+      </div>
+      <div>
+        <h3>Replay uploaded audio file</h3>
+        <hr>
+        {% for file in files %}
+        <audio controls src="{{ url_for('upload', filename=file)}}">Your browser does not support the audio
+          element</audio>
+        {% endfor %}
+        </hr>
+      </div>
+      <div>
+        <h3>Chromagrams</h3>
+        {% for file in files %}
+        {{ js_resources|indent(4)|safe }} {{ css_resources|indent(4)|safe }}
+        {{ scripts[file]|indent(4)|safe }} {{ divs[file]|indent(4)|safe }}
+        {% endfor %}
+      </div>
+      <div>
+        <h3>Related Songs</h3>
+        {% for file in files %}
+        {{ tables[file]|indent(4)|safe }}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <!-- Bootstrap core JavaScript
+    ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+
+</html>
