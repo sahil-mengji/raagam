@@ -32,7 +32,7 @@ def GenerateAddressCoupleDB(databaseFileName, songID): # Create an array of addr
 
     # Here I convert each index of the two previous lists into binary and concatenate them all. This is the hashing function for the table
     encodedAddressArray = [[''.join((Encode(x[y][0], 9), Encode(x[y][1], 9), Encode(x[y][2], 14))) for y in range(0,5)] for x in addressArray]
-    encodedCoupleArray = [[''.join((Encode(x[y][0], 32), Encode(x[y][1], 32))) for y in range(0,5)] for x in coupleArray]
+    encodedCoupleArray = [[''.join((Encode(int(x[y][0]), 32), Encode(int(x[y][1]), 32))) for y in range(0,5)] for x in coupleArray]
 
     return encodedAddressArray, encodedCoupleArray
 
